@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom'
-import { Container, Navbar, Nav } from 'react-bootstrap'
+import { Link as LinkRouter } from 'react-router-dom'
+import { Container, Navbar as NavbarBootstrap, Nav } from 'react-bootstrap'
 import styled from 'styled-components'
 
-const MyNavbar = styled(Navbar)`
+const Navbar = styled(NavbarBootstrap)`
   height: 60px;
 `
 
-const MyNavbarBrand = styled(Navbar.Brand)`
+const NavbarBrand = styled(Navbar.Brand)`
   font-size: 1.5rem;
   position: absolute;
 
@@ -15,7 +15,7 @@ const MyNavbarBrand = styled(Navbar.Brand)`
   }
 `
 
-const MyLink = styled(Link)`
+const Link = styled(LinkRouter)`
   color: #fff;
   font-weight: 200;
   text-decoration: none;
@@ -33,17 +33,17 @@ const MyLink = styled(Link)`
 
 export const Header = ({ title }) => {
   return (
-    <MyNavbar bg='success' variant='dark'>
+    <Navbar bg='success' variant='dark'>
       <Container>
-        <MyNavbarBrand href='/'>{title}</MyNavbarBrand>
+        <NavbarBrand href='/'>{title}</NavbarBrand>
 
         <Nav className='mx-auto'>
-          <MyLink to='/hooks'>TRENDING</MyLink>
-          <MyLink to='health'>HEALTH</MyLink>
-          <MyLink to='sport'>SPORT</MyLink>
-          <MyLink to='business'>BUSINESS</MyLink>
+          <Link to='/hooks'>TRENDING</Link>
+          <Link to='health'>HEALTH</Link>
+          <Link to='sport'>SPORT</Link>
+          <Link to='business'>BUSINESS</Link>
         </Nav>
       </Container>
-    </MyNavbar>
+    </Navbar>
   )
 }
