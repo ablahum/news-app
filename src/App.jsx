@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Container, Row } from 'react-bootstrap'
-import axios from 'axios'
 import moment from 'moment'
 
 import { Header, Search, Body } from './components'
+import { getByKey, getDefault } from './apis'
 
 const App = () => {
   const [articles, setArticles] = useState([])
   const [keyword, setKeyword] = useState('')
 
-  const apiKey = 'd8aada2c9c54465c88335ed383186169'
+  const changes = (value) => setKeyword(value)
 
   const getNews = async () => {
     try {
-      const res = await axios.get(`https://newsapi.org/v2/top-headlines?country=id&apiKey=${apiKey}`)
+      const res = await getDefault()
 
       setArticles(res.data.article)
     } catch (err) {
@@ -22,9 +22,9 @@ const App = () => {
     }
   }
 
-  const getSpecifiedNews = async () => {
+  const getSpecificNews = async () => {
     try {
-      const res = await axios.get(`https://newsapi.org/v2/everything?language=id&apiKey=${apiKey}&q=${keyword}`)
+      const res = await getByKey(keyword)
 
       setArticles(res.data.articles)
     } catch (err) {
@@ -32,17 +32,43 @@ const App = () => {
     }
   }
 
+  // const getBusinessNews = async () => {
+  //   try {
+  //     const res = await getByCategory('business')
+
+  //     setArticles(res.data.articles)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+  // const getHealthNews = async () => {
+  //   try {
+  //     const res = await getByCategory('health')
+
+  //     setArticles(res.data.articles)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+  // const getSportNews = async () => {
+  //   try {
+  //     const res = await getByCategory('sport')
+
+  //     setArticles(res.data.articles)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
   useEffect(() => {
     getNews()
   }, [])
 
   useEffect(() => {
-    getSpecifiedNews()
+    getSpecificNews()
   }, [keyword])
-
-  const changes = (value) => {
-    setKeyword(value)
-  }
 
   return (
     <div>

@@ -1,29 +1,26 @@
 import { useState, useEffect } from 'react'
 import { Row } from 'react-bootstrap'
-import axios from 'axios'
 import moment from 'moment'
 
 import { Body } from '../components'
+// import { getByCategory } from '../apis'
 
 export const Business = () => {
   const [articles, setArticles] = useState([])
 
-  const apiKey = 'd8aada2c9c54465c88335ed383186169'
-  const category = 'business'
+  // const getBusinessNews = async () => {
+  //   try {
+  //     const res = await getByCategory('business')
 
-  const getBusinessNews = async () => {
-    try {
-      const res = await axios.get(`https://newsapi.org/v2/top-headlines?country=id&category=${category}&apiKey=${apiKey}`)
+  //     setArticles(res.data.articles)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
-      setArticles(res.data.articles)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    getBusinessNews()
-  }, [])
+  // useEffect(() => {
+  //   getBusinessNews()
+  // }, [])
 
   return (
     <Row>
