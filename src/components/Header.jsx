@@ -38,10 +38,10 @@ export const Header = ({ title }) => {
         <NavbarBrand href='/'>{title}</NavbarBrand>
 
         <Nav className='mx-auto'>
-          <Link to='/hooks'>TRENDING</Link>
+          {/* <Link to='/hooks'>TRENDING</Link>
           <Link to='health'>HEALTH</Link>
           <Link to='sport'>SPORT</Link>
-          <Link to='business'>BUSINESS</Link>
+          <Link to='business'>BUSINESS</Link> */}
         </Nav>
       </Container>
     </Navbar>
