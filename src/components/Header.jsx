@@ -10,40 +10,57 @@ const NavbarBrand = styled(Navbar.Brand)`
   font-size: 1.5rem;
   position: absolute;
 
-  @media (max-width: 992px) {
+  @media (max-width: 991px) {
     display: none;
   }
 `
 
 const Link = styled(LinkRouter)`
-  color: #fff;
-  font-weight: 200;
+  color: var(--white);
   text-decoration: none;
-  padding: 0 1em;
-  line-height: 60px;
+  padding: 0 1rem;
   transition: 300ms;
+  line-height: 60px;
 
   :hover {
-    color: #198754;
-    background-color: #fff;
+    color: var(--primary);
+    background-color: var(--white);
     font-size: 1.2rem;
     transition: 300ms;
   }
+
+  @media (max-width: 424px) {
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: 376px) {
+    font-size: 0.8rem;
+  }
 `
 
-export const Header = ({ title }) => {
+const Header = ({ title, setActive }) => {
   return (
     <Navbar bg='success' variant='dark'>
       <Container>
         <NavbarBrand href='/'>{title}</NavbarBrand>
 
         <Nav className='mx-auto'>
-          {/* <Link to='/hooks'>TRENDING</Link>
-          <Link to='health'>HEALTH</Link>
-          <Link to='sport'>SPORT</Link>
-          <Link to='business'>BUSINESS</Link> */}
+          <Link to='/' onClick={() => setActive('trending')}>
+            TRENDING
+          </Link>
+          <Link to='business' onClick={() => setActive('business')}>
+            BUSINESS
+          </Link>
+          <Link to='health' onClick={() => setActive('health')}>
+            HEALTH
+          </Link>
+          <Link to='sport' onClick={() => setActive('sport')}>
+            SPORT
+          </Link>
         </Nav>
       </Container>
     </Navbar>
   )
 }
+
+export default Header
