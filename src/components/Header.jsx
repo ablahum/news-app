@@ -2,6 +2,8 @@ import { Link as LinkRouter } from 'react-router-dom'
 import { Container, Navbar as NavbarBootstrap, Nav } from 'react-bootstrap'
 import styled from 'styled-components'
 
+import './header.css'
+
 const Navbar = styled(NavbarBootstrap)`
   height: 60px;
 `
@@ -22,7 +24,7 @@ const Link = styled(LinkRouter)`
   transition: 300ms;
   line-height: 60px;
 
-  :hover {
+  &:hover {
     color: var(--primary);
     background-color: var(--white);
     font-size: 1.2rem;
@@ -38,25 +40,25 @@ const Link = styled(LinkRouter)`
   }
 `
 
-const Header = ({ title, setActive }) => {
+const Header = ({ title, active, setActive }) => {
   return (
     <Navbar bg='success' variant='dark'>
       <Container>
         <NavbarBrand href='/'>{title}</NavbarBrand>
 
         <Nav className='mx-auto'>
-          <Link to='/' onClick={() => setActive('trending')}>
+          <LinkRouter to='/' onClick={() => setActive('trending')} className={`navbar ${active === 'trending' && 'selected'}`}>
             TRENDING
-          </Link>
-          <Link to='business' onClick={() => setActive('business')}>
+          </LinkRouter>
+          <LinkRouter to='business' onClick={() => setActive('business')} className={`navbar ${active === 'business' && 'selected'}`}>
             BUSINESS
-          </Link>
-          <Link to='health' onClick={() => setActive('health')}>
+          </LinkRouter>
+          <LinkRouter to='health' onClick={() => setActive('health')} className={active === 'health' ? 'navbar selected' : 'navbar'}>
             HEALTH
-          </Link>
-          <Link to='sport' onClick={() => setActive('sport')}>
+          </LinkRouter>
+          <LinkRouter to='sport' onClick={() => setActive('sport')} className={active === 'sport' ? 'navbar selected' : 'navbar'}>
             SPORT
-          </Link>
+          </LinkRouter>
         </Nav>
       </Container>
     </Navbar>

@@ -1,0 +1,22 @@
+.navbar {
+  color: var(--white);
+  text-decoration: none;
+  padding: 0 1rem;
+  transition: 300ms;
+  line-height: 60px;
+}
+
+.navbar:hover {
+  color: var(--white);
+}
+
+.selected {
+  color: var(--primary);
+  background-color: var(--white);
+  font-size: 1.2rem;
+  transition: 300ms;
+}
+
+.selected:hover {
+  color: var(--primary);
+}

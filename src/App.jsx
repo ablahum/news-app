@@ -89,7 +89,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Header title='News App' setActive={setActive} />
+        <Header title='News App' active={active} setActive={setActive} />
 
         <Container>
           <Search onKeyUp={handleKeyword} />

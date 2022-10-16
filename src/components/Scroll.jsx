@@ -12,7 +12,7 @@ const Button = styled(FaArrowCircleUp)`
   color: var(--primary);
   transition: 300ms;
 
-  :hover {
+  &:hover {
     font-size: 5rem;
     opacity: 1;
   }
