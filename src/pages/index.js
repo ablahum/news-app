@@ -1,5 +1,6 @@
-import { Health } from './Health'
-import { Sport } from './Sport'
-import { Business } from './Business'
+import Trending from './Trending'
+import Business from './Business'
+import Health from './Health'
+import Sport from './Sport'
 
-export { Health, Sport, Business }
+export { Trending, Business, Health, Sport }

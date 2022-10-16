@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import { Body } from '../components'
 
-const Business = ({ articles }) => {
+const Trending = ({ articles }) => {
   return (
     <Row>
       {articles?.map((article, i) => (
@@ -13,4 +13,4 @@ const Business = ({ articles }) => {
   )
 }
 
-export default Business
+export default Trending

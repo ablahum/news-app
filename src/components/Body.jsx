@@ -1,6 +1,6 @@
 import { Col, Card, Button } from 'react-bootstrap'
 
-export const Body = ({ img, title, author, time, desc, more }) => {
+const Body = ({ img, title, author, time, desc, more }) => {
   return (
     <Col xl={3} lg={4} md={6} sm={12} className='my-4'>
       <Card className='shadow'>
@@ -25,3 +25,5 @@ export const Body = ({ img, title, author, time, desc, more }) => {
     </Col>
   )
 }
+
+export default Body

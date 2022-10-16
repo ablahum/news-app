@@ -11,5 +11,5 @@ export const getByKey = async (keyword) => {
 }
 
 export const getByCategory = async (category) => {
-  return await axios.get(`https://newsapi/org/v2/top-headlines?country=id&category=${category}&apiKey=${apiKey}`)
+  return await axios.get(`https://newsapi.org/v2/top-headlines?country=id&category=${category}&apiKey=${apiKey}`)
 }

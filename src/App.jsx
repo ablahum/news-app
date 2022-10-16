@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
-// import { Outlet } from 'react-router-dom'
-import { Container, Row } from 'react-bootstrap'
-import moment from 'moment'
+import { useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 
-import { Header, Search, Body } from './components'
-import { getByKey, getDefault } from './apis'
+import { Header, Search, Scroll } from './components'
+import { Trending, Business, Health, Sport } from './pages'
+import { getByCategory, getByKey, getDefault } from './api'
 
 const App = () => {
   const [articles, setArticles] = useState([])
-  const [keyword, setKeyword] = useState('')
+  const [active, setActive] = useState('trending')
 
   const getNews = async () => {
     try {
@@ -30,65 +30,81 @@ const App = () => {
     }
   }
 
-  // const getBusinessNews = async () => {
-  //   try {
-  //     const res = await getByCategory('business')
+  const getBusinessNews = async () => {
+    try {
+      const res = await getByCategory('business')
 
-  //     setArticles(res.data.articles)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+      setArticles(res.data.articles)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-  // const getHealthNews = async () => {
-  //   try {
-  //     const res = await getByCategory('health')
+  const getHealthNews = async () => {
+    try {
+      const res = await getByCategory('health')
 
-  //     setArticles(res.data.articles)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+      setArticles(res.data.articles)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-  // const getSportNews = async () => {
-  //   try {
-  //     const res = await getByCategory('sport')
+  const getSportNews = async () => {
+    try {
+      const res = await getByCategory('sport')
 
-  //     setArticles(res.data.articles)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+      setArticles(res.data.articles)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
-    getNews()
-  }, [])
+    switch (active) {
+      case 'business':
+        getBusinessNews()
+        break
+      case 'health':
+        getHealthNews()
+        break
+      case 'sport':
+        getSportNews()
+        break
+
+      default:
+        getNews()
+        break
+    }
+  }, [active])
+
+  const handleKeyword = (e) => {
+    if (e.target.value) {
+      getSpecificNews(e.target.value)
+    } else {
+      getNews()
+    }
+  }
 
   return (
-    <div>
-      <Header title='News App' />
+    <>
+      <BrowserRouter>
+        <Header title='News App' setActive={setActive} />
 
-      <Container>
-        <Search onKeyUp={(e) => getSpecificNews(e.target.value)} />
+        <Container>
+          <Search onKeyUp={handleKeyword} />
 
-        <Row>
-          {articles?.map((article, i) => (
-            <Body key={i} img={article.urlToImage} title={article.title} author={article.author} time={moment(article.publishedAt).format('dddd, DD MMMM - HH:mm')} desc={article.description} more={article.url} />
-          ))}
-        </Row>
+          <Routes>
+            <Route path='/' element={<Trending articles={articles} />} />
+            <Route path='/business' element={<Business articles={articles} />} />
+            <Route path='/health' element={<Health articles={articles} />} />
+            <Route path='/sport' element={<Sport articles={articles} />} />
+          </Routes>
+        </Container>
 
-        {/* {keyword ? (
-          <Row>
-            {articles &&
-              articles.map((article, i) => (
-                <Body key={i} img={article.urlToImage} title={article.title} author={article.author} time={moment(article.publishedAt).format('dddd, DD MMMM - HH:mm')} desc={article.description} more={article.url} />
-              ))}
-          </Row>
-        ) : (
-          <Outlet />
-        )} */}
-      </Container>
-    </div>
+        <Scroll />
+      </BrowserRouter>
+    </>
   )
 }
 
